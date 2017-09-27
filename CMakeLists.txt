@@ -12,14 +12,21 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
-file(GLOB_RECURSE _sources ./src/ FOLLOW_SYMLINKS *.cc)
+# grab sources files :: begin
+file(GLOB_RECURSE _project_sources_cxx ./sources/ FOLLOW_SYMLINKS *.cc)
+file(GLOB_RECURSE _project_sources_c ./sources/ FOLLOW_SYMLINKS *.c)
+set(_project_sources ${_project_sources_c} ${_project_sources_cxx})
+unset(_project_sources_c)
+unset(_project_sources_cxx)
+# :: end
 
 include_directories(
-	./include
+	./sources/
+	./sources/gidway/
 	)
 
 add_executable(${PROJECT_NAME}
-	${_sources}
+	${_project_sources}
 	)
 
 set_target_properties(${PROJECT_NAME}
