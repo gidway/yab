@@ -4,8 +4,6 @@
 
 namespace gidway {
 
-class Size;
-
 template <typename _SizeType = int, _SizeType _Empty = 0>
 class _size_base
 {
@@ -112,30 +110,14 @@ protected:
 
 /**
  */
-class Size
-	: public _size_base<unsigned>
-{
-public:
-	using _base = _size_base<unsigned>;
-
-	virtual ~Size (void) {}
-
-	explicit Size (void) {}
-
-	/*
-	template <typename T>
-	Size (const T __v)
-		: _base(__v)
-	{
-	}
-	*/
-
-	template <typename T>
-	Size (const T & __v)
-		: _base(__v)
-	{
-	}
-
-}; // class Size
+using USizeBig = _size_base<unsigned long long, 0ull>;
+using USizeShort = _size_base<unsigned short, static_cast<unsigned short>(0u)>;
+using USize = _size_base<unsigned, 0u>;
+//
+using ISizeBig = _size_base<signed long long, 0ull>;
+using ISizeShort = _size_base<signed short, static_cast<unsigned short>(0u)>;
+using ISize = _size_base<signed, 0u>;
+//
+using Size = USizeBig;
 
 } // namespace gidway
