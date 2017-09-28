@@ -13,11 +13,11 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # grab sources files :: begin
-file(GLOB_RECURSE _project_sources_cxx ./sources/ FOLLOW_SYMLINKS *.cc)
-file(GLOB_RECURSE _project_sources_c ./sources/ FOLLOW_SYMLINKS *.c)
-set(_project_sources ${_project_sources_c} ${_project_sources_cxx})
-unset(_project_sources_c)
-unset(_project_sources_cxx)
+file(GLOB_RECURSE _YAB_PROJECT_SOURCES_cxx FOLLOW_SYMLINKS ./sources/*.cc)
+file(GLOB_RECURSE _YAB_PROJECT_SOURCES_c FOLLOW_SYMLINKS ./sources/*.c)
+set(_YAB_PROJECT_SOURCES ${_YAB_PROJECT_SOURCES_c} ${_YAB_PROJECT_SOURCES_cxx})
+unset(_YAB_PROJECT_SOURCES_c)
+unset(_YAB_PROJECT_SOURCES_cxx)
 # :: end
 
 include_directories(
@@ -26,7 +26,7 @@ include_directories(
 	)
 
 add_executable(${PROJECT_NAME}
-	${_project_sources}
+	${_YAB_PROJECT_SOURCES}
 	)
 
 set_target_properties(${PROJECT_NAME}

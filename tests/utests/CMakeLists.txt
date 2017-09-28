@@ -10,7 +10,7 @@ message("(d) PROJECT_NAME  = ${PROJECT_NAME} ")
 
 file(GLOB_RECURSE _sources_c ${CMAKE_SOURCE_DIR} FOLLOW_SYMLINKS *.c)
 file(GLOB_RECURSE _sources_cxx ${CMAKE_SOURCE_DIR} FOLLOW_SYMLINKS *.cc)
-set(_sources_utests ${_sources_c} ${_sources_cxx})
+set(_sources_utests ${_YAB_PROJECT_SOURCES} ${_sources_c} ${_sources_cxx})
 
 # Locate GTest
 find_package(GTest REQUIRED)
