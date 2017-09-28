@@ -1,9 +1,12 @@
 // Copyright 2017 (C) Gidway, PL :: gidway.net
+
 #pragma once
+
+#include <utils/size.hh>
 
 #include <parsers/parser.hh>
 
-#include <utils/size.hh>
+#include <html/doc.hh>
 
 namespace gidway {
 namespace parsers {
@@ -14,13 +17,12 @@ class Html
 public:
 	using gidway::parsers::Parser::Parser;
 
-	virtual ~Html() = default;
+	virtual ~Html() {}
 
 	/**
 	 * Load HTML content
 	 */
-	explicit Html (const char*) {}
-
+	explicit Html (const char*);
 
 	::gidway::Size size (void) const {
 		return 0; // TODO
@@ -36,4 +38,6 @@ private:
 }; // clas Html
 
 } // namespace parsers
+
+using HTMLParser = parsers::Html;
 } // namespace gidway
