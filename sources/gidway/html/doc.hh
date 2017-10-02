@@ -1,19 +1,37 @@
 // Copyright 2017 (C) Gidway, PL :: gidway.net
 #pragma once
 
+#include <string>
+
 #include <xml/doc.hh>
+#include <html/element.hh>
 
 namespace gidway {
-	class HTMLElement;
 
 namespace html {
 
-class Doc
-	: public ::gidway::xml::doc<::gidway::HTMLElement>
+class doc
+	: public ::gidway::xml::doc<::gidway::html::element>
 {
-}; // class Doc
+public:
+	virtual ~doc (void) = default;
+	doc (void) = default;
+
+	void clear (void) {
+		// TODO
+	}
+
+	doc & operator << (const char __c) {
+		return *this;
+	}
+
+	doc & operator << (const std::string & __str) {
+		return *this;
+	}
+
+}; // class doc
 
 } // namespace html
 
-using HTMLDoc = html::Doc;
+using HTMLDoc = html::doc;
 } // namespace gidway

@@ -6,14 +6,14 @@
 namespace gidway {
 namespace html {
 
-class Element
-	: public ::gidway::xml::Node
+class element
+	: public ::gidway::xml::node
 {
 public:
-	using ::gidway::xml::Node;
-}; // class Element
+	using ::gidway::xml::node::node;
+}; // class element
 
 } // namespace html
 
-using HTMLElement = html::Element;
+using HTMLElement = html::element;
 } // namespace gidway
