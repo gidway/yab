@@ -24,17 +24,20 @@ public:
 	 */
 	explicit Html (const char*);
 
-	::gidway::Size size (void) const {
-		return 0; // TODO
+	::gidway::Size countTags (void) const {
+		return _tags_count;
 	}
 
-	::gidway::Size layers (void) const {
-		return ::gidway::Size::empty(); // TODO
+	::gidway::Size countChars (void) const {
+		return _chars_count;
 	}
 
 private:
 	::gidway::Size _tags_count;
-	::gidway::Size _layers_count;
+	::gidway::Size _chars_count;
+
+	::gidway::html::doc _dom;
+
 }; // clas Html
 
 } // namespace parsers
