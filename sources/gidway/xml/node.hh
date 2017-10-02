@@ -7,13 +7,13 @@ namespace xml {
 /**
  * Interface of XML nodes
  */
-class Node {
+class node {
 public:
-	virtual ~Node (void) = default;
-	Node (void) = default;
-}; // class Node
+	virtual ~node (void) = default;
+	node (void) = default;
+}; // class node
 
 } // namespace xml
 
-using XMLNode = xml::Node;
+using XMLNode = xml::node;
 } // namespace gidway

@@ -6,7 +6,7 @@
 
 namespace gidway {
 namespace xml {
-	class Node;
+	class node;
 
 template <typename _Node>
 class doc
@@ -29,7 +29,7 @@ public:
 protected:
 	bool __validate_node_type (void) const {
 		static ::std::shared_ptr<_Node> _test_node(::std::make_shared<_Node>());
-		return (nullptr != dynamic_cast<::gidway::xml::Node*>(_test_node.get()));
+		return (nullptr != dynamic_cast<::gidway::xml::node*>(_test_node.get()));
 	}
 	void _validate_node_type (void) const {
 		assert(__validate_node_type() or "Node Element must have XMLNode as base");
