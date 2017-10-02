@@ -1,5 +1,4 @@
 // Copyright 2017 (C) Gidway, PL :: gidway.net
-
 #pragma once
 
 namespace gidway {
@@ -93,6 +92,11 @@ public: // operators
 
 	inline bool operator != (const _this & __sb) const {
 		return (not this->operator==(__sb));
+	}
+
+	inline _this & operator ++ (void) {
+		++_value;
+		return *this;
 	}
 
 public: // statics methods
