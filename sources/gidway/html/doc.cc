@@ -4,11 +4,15 @@ namespace gidway {
 namespace html {
 
 void doc::_exec_job_for_char (const char __c) {
+	_current_job.exec(__c);
+}
+
+void doc::current_job::init::exec (const char __c) {
 	switch (__c) {
 		case '<':
 		case '>':
 		default:
-			xml_base::_insert_as_content_of((*_current_node), __c);
+			_doc.xml_base::_insert_as_content_of(_doc.current_node(), __c);
 			break;
 	} // switch (__c)
 }
