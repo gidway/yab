@@ -12,7 +12,7 @@ namespace html {
 
 /**
  * This class generate elements of DOM
- * Working as state-machine, where states are switched by input data (chars)
+ * Working as job-machine, where jobs are switched by input data (chars)
  * States, like:
  * - open creation of tag
  * - closed created tag
@@ -25,14 +25,14 @@ class doc
 	using xml_base = ::gidway::xml::doc<::gidway::html::dom>;
 
 	/**
-	 * Machine of states / jobs
+	 * Machine of jobs
 	 */
-	class state {
+	class job {
 	public:
-		state (void) = default;
-		state (const char) {} // TODO
+		job (void) = default;
 	protected:
-		virtual ~state (void) = default;
+		virtual ~job (void) = default;
+		job * __parent_job {nullptr};
 	};
 
 public:
@@ -45,22 +45,22 @@ public:
 	}
 
 	doc & operator << (const char __c) {
-		_switch_state_by_char(__c);
+		_exec_job_for_char(__c);
 		return *this;
 	}
 
 	doc & operator << (const std::string & __str) {
 		for (const auto c : __str) {
-			(void) doc::operator<<(static_cast<const char>(c));
+			(void) (*this).operator<<(static_cast<const char>(c));
 		}
 		return *this;
 	}
 
 protected:
 
-	struct current_state final
+	struct current_job final
 	{
-		~current_state (void) = default;
+		~current_job (void) = default;
 
 		class init;
 		class finished;
@@ -70,41 +70,41 @@ protected:
 		class tag_set_attribute_name;
 		class tag_set_attribute_value;
 
-		class init : public state {};
-		class finished : public state {};
-		class tag_set_name: public state {};
-		class tag_set_attribute_name : public state {};
-		class tag_set_attribute_value : public state {};
+		class init : public job {};
+		class finished : public job {};
+		class tag_set_name: public job {};
+		class tag_set_attribute_name : public job {};
+		class tag_set_attribute_value : public job {};
 
-		class tag_begin : public state {
+		class tag_begin : public job {
 		public:
-			using state::state;
+			using job::job;
 		}; // class tag_begin
 
-		class tag_end : public state {
+		class tag_end : public job {
 		public:
-			using state::state;
+			using job::job;
 		}; // class tag_end
 
-		::std::shared_ptr<state> _state;
+		::std::shared_ptr<job> _job;
 
-		current_state (void)
-			: _state(::std::make_shared<init>())
+		current_job (void)
+			: _job(::std::make_shared<init>())
 		{
 		}
 
-	}; // struct current_state
+	}; // struct current_job
 
 	/**
-	 * Take a decision about object state on char
+	 * Take a decision about object job on char
 	 * On default action, if we not supoort any job for redirected char,
 	 * the char will be inserted into some abject as content.
 	 */
-	void _switch_state_by_char (const char);
+	void _exec_job_for_char (const char);
 
 private:
 
-	current_state _current_state;
+	current_job _current_job;
 
 	::std::shared_ptr<node_type> _current_node;
 

@@ -3,7 +3,7 @@
 namespace gidway {
 namespace html {
 
-void doc::_switch_state_by_char (const char __c) {
+void doc::_exec_job_for_char (const char __c) {
 	switch (__c) {
 		case '<':
 		case '>':
