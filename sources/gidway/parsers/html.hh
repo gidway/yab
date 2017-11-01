@@ -12,7 +12,8 @@ namespace gidway {
 namespace parsers {
 
 class Html
-	: public gidway::parsers::Parser
+	: public ::gidway::parsers::Parser
+	, public ::gidway::html::doc
 {
 public:
 	using gidway::parsers::Parser::Parser;
@@ -23,20 +24,6 @@ public:
 	 * Load HTML content
 	 */
 	explicit Html (const char*);
-
-	::gidway::Size countTags (void) const {
-		return _tags_count;
-	}
-
-	::gidway::Size countChars (void) const {
-		return _chars_count;
-	}
-
-private:
-	::gidway::Size _tags_count;
-	::gidway::Size _chars_count;
-
-	::gidway::html::doc _dom;
 
 }; // clas Html
 
